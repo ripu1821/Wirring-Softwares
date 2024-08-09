@@ -4,8 +4,8 @@ var username = document.getElementById("username");
 var pass = document.getElementById("password");
 var addEmployeeBtn = document.getElementById("addEmployeeBtn");
 const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwa3Jlc2hya3RvZ3VxdndsYWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI1NzU3ODIsImV4cCI6MjAyODE1MTc4Mn0.AD5Oh1ya3N_r6LumXEEjhqZj72nTbyWftReAmZNEO4s";
-const supabaseUrl = "https://bpkreshrktoguqvwlaii.supabase.co";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkenFoamJrdGtveWRobmpud3F3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI0ODYzODcsImV4cCI6MjAyODA2MjM4N30.8SxMTA8Gma05ccO7ZKHGJqVLPQLOpQbvlvDRkh1ta54";
+const supabaseUrl = "https://edzqhjbktkoydhnjnwqw.supabase.co";
 const database = supabase.createClient(supabaseUrl, supabaseKey);
 const { auth } = database;
 
@@ -79,14 +79,14 @@ updateContentVisibility();
 async function addEmployee(name, role) {
   try {
     const { error } = await database
-      .from("wirring-team")
+      .from("employee")
       .insert([{ name, role }]);
     if (error) {
       console.error("Error adding employee:", error.message);
       return null;
     }
     const { data, error: fetchError } = await database
-      .from("wirring-team")
+      .from("employee")
       .select("*")
       .eq("name", name)
       .single();
@@ -125,7 +125,7 @@ addEmployeeBtn?.addEventListener("click", async () => {
 
 async function getEmployees() {
   try {
-    const { data, error } = await database.from("wirring-team").select("*");
+    const { data, error } = await database.from("employee").select("*");
 
     if (error) {
       console.error("Error getting employees:", error.message);
@@ -193,7 +193,7 @@ document?.addEventListener("click", async (event) => {
 
 async function deleteEmployee(id) {
   try {
-    const { error } = await database.from("wirring-team").delete().eq("id", id);
+    const { error } = await database.from("employee").delete().eq("id", id);
     if (error) {
       console.error("Error deleting employee:", error.message);
       return false;
@@ -253,7 +253,7 @@ document.addEventListener("click", async (event) => {
 async function getEmployeeById(id) {
   try {
     const { data, error } = await database
-      .from("wirring-team")
+      .from("employee")
       .select("*")
       .eq("id", id)
       .single();
@@ -273,7 +273,7 @@ async function getEmployeeById(id) {
 async function updateEmployee(id, name, role) {
   try {
     const { error } = await database
-      .from("wirring-team")
+      .from("employee")
       .update({ name, role })
       .eq("id", id);
 
@@ -293,7 +293,7 @@ async function updateEmployee(id, name, role) {
 async function employeeList() {
   console.log("ripu 1");
   try {
-    const { data, error } = await database.from("wirring-team").select("*");
+    const { data, error } = await database.from("employee").select("*");
 
     if (error) {
       console.error("Error getting employees:", error.message);

@@ -1,13 +1,13 @@
 var signOutButton = document.getElementById("signOutBtn");
 const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwa3Jlc2hya3RvZ3VxdndsYWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI1NzU3ODIsImV4cCI6MjAyODE1MTc4Mn0.AD5Oh1ya3N_r6LumXEEjhqZj72nTbyWftReAmZNEO4s";
-const supabaseUrl = "https://bpkreshrktoguqvwlaii.supabase.co";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkenFoamJrdGtveWRobmpud3F3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI0ODYzODcsImV4cCI6MjAyODA2MjM4N30.8SxMTA8Gma05ccO7ZKHGJqVLPQLOpQbvlvDRkh1ta54";
+const supabaseUrl = "https://edzqhjbktkoydhnjnwqw.supabase.co";
 const database = supabase.createClient(supabaseUrl, supabaseKey);
 const { auth } = database;
 
 async function employeeList() {
   try {
-    const { data, error } = await database.from("wirring-team").select("*");
+    const { data, error } = await database.from("employee").select("*");
 
     if (error) {
       console.error("Error getting employees:", error.message);
@@ -22,7 +22,7 @@ async function employeeList() {
 }
 async function getEmployees() {
   try {
-    const { data, error } = await database.from("wirring-team").select("*");
+    const { data, error } = await database.from("employee").select("*");
 
     if (error) {
       console.error("Error getting employees:", error.message);
